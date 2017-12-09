@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package saulmm.coordinatorexamples;
 
 import android.content.Context;
@@ -60,7 +75,11 @@ public class MaterialUpConceptActivity extends AppCompatActivity
 
 		if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
 			mIsAvatarShown = false;
-			mProfileImage.animate().scaleY(0).scaleX(0).setDuration(200).start();
+
+			mProfileImage.animate()
+				.scaleY(0).scaleX(0)
+				.setDuration(200)
+				.start();
 		}
 
 		if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
@@ -72,33 +91,26 @@ public class MaterialUpConceptActivity extends AppCompatActivity
 		}
 	}
 
-	class TabsAdapter extends FragmentPagerAdapter {
-		public TabsAdapter(FragmentManager fm) {
+	private static class TabsAdapter extends FragmentPagerAdapter {
+		private static final int TAB_COUNT = 2;
+
+		TabsAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
 		@Override
 		public int getCount() {
-			return 2;
+			return TAB_COUNT;
 		}
 
 		@Override
 		public Fragment getItem(int i) {
-			switch(i) {
-				case 0: return MaterialUpConceptFakePage.newInstance();
-				case 1: return MaterialUpConceptFakePage.newInstance();
-			}
-			return null;
+			return FakePageFragment.newInstance();
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			switch(position) {
-				case 0: return "Tab 1";
-				case 1: return "Tab 2";
-			}
-			return "";
+			return "Tab " + String.valueOf(position);
 		}
 	}
-
 }
